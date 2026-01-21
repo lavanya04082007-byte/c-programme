@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+    int pin = 7418;        // Default ATM PIN
+    int enteredPin;
+    int attempts = 0;
+
+    printf("Welcome to ATM Service\n");
+
+    while (attempts < 3) {
+        printf("Enter your PIN: ");
+        scanf("%d", &enteredPin);
+
+        if (enteredPin == pin) {
+            printf("PIN verified successfully.\n");
+            printf("You can proceed with your transaction.\n");
+            return 0;
+        } else {
+            attempts++;
+            printf("Wrong PIN. Attempts left: %d\n", 3 - attempts);
+        }
+    }
+
+    printf("Your card is blocked due to 3 wrong PIN attempts.\n");
+
+    return 0;
+}
