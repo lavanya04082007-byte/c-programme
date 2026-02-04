@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Employee {
+    char designation[30];
+    struct Employee *left;
+    struct Employee *right;
+};
+
+struct Employee* createNode(char name[]) {
+    struct Employee *temp = (struct Employee*)malloc(sizeof(struct Employee));
+    strcpy(temp->designation, name);
+    temp->left = NULL;
+    temp->right = NULL;
+    return temp;
+}
+
+int main() {
+    struct Employee *CEO = createNode("CEO");
+    struct Employee *Manager1 = createNode("Manager1");
+    struct Employee *Manager2 = createNode("Manager2");
+
+    CEO->left = Manager1;
+    Manager1->right = Manager2;
+
+    printf("CEO Name: %s\n", CEO->designation);
+    printf("Left Subordinate of CEO: %s\n", CEO->left->designation);
+    printf("Right Subordinate of Left Manager: %s\n",
+           CEO->left->right->designation);
+
+    return 0;
+}
