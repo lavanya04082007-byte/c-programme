@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Category {
+    char name[30];
+    struct Category *left;
+    struct Category *right;
+};
+
+struct Category* createNode(char name[]) {
+    struct Category *temp = (struct Category*)malloc(sizeof(struct Category));
+    strcpy(temp->name, name);
+    temp->left = NULL;
+    temp->right = NULL;
+    return temp;
+}
+
+int main() {
+  
+    struct Category *root = createNode("Products");
+    struct Category *electronics = createNode("Electronics");
+    struct Category *clothing = createNode("Clothing");
+    struct Category *mobiles = createNode("Mobiles");
+    struct Category *laptops = createNode("Laptops");
+
+    root->left = electronics;
+    root->right = clothing;
+    electronics->left = mobiles;
+    electronics->right = laptops;
+
+    printf("Main Category: %s\n", root->name);
+    printf("Electronics Sub-Category: %s\n", root->left->left->name);
+    printf("Electronics Sub-Category: %s\n", root->left->right->name);
+
+    return 0;
+}
