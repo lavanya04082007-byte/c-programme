@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    char data;
+    struct Node *left, *right;
+};
+
+struct Node* createNode(char data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+void preorder(struct Node* root) {
+    if (root != NULL) {
+        printf("%c ", root->data);   
+        preorder(root->left);       
+        preorder(root->right);       
+    }
+}
+
+int main() {
+    
+    struct Node* root = createNode('*');
+    root->left = createNode('+');
+    root->right = createNode('C');
+
+    root->left->left = createNode('A');
+    root->left->right = createNode('B');
+
+    printf("Prefix Expression:\n");
+    preorder(root);
+
+    return 0;
+}
