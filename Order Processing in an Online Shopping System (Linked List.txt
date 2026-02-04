@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int orderID;
+    struct Node *next;
+};
+
+struct Node *front = NULL;
+struct Node *rear = NULL;
+
+int isEmpty() {
+    return (front == NULL);
+}
+
+void enqueue(int orderID) {
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    newNode->orderID = orderID;
+    newNode->next = NULL;
+
+    if (isEmpty()) {
+        front = rear = newNode;
+    } else {
+        rear->next = newNode;
+        rear = newNode;
+    }
+    printf("Order placed: %d\n", orderID);
+}
+
+void dequeue() {
+    if (isEmpty()) {
+        printf("No orders to process\n");
+    } else {
+        struct Node *temp = front;
+        printf("Order processed: %d\n", front->orderID);
+        front = front->next;
+        free(temp);
+
+        if (front == NULL)
+            rear = NULL;
+    }
+}
+
+void showFront() {
+    if (isEmpty()) {
+        printf("No pending orders\n");
+    } else {
+        printf("Next order: %d\n", front->orderID);
+    }
+}
+
+
+void size() {
+    int count = 0;
+    struct Node *temp = front;
+    while (temp != NULL) {
+        count++;
+        temp = temp->next;
+    }
+    printf("Pending orders: %d\n", count);
+}
+
+int main() {
+
+    enqueue(101);   
+    enqueue(102);   
+    enqueue(103);   
+
+    dequeue();      
+    showFront();    
+    size();         
+
+    return 0;
+}
