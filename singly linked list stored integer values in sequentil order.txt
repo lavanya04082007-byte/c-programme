@@ -1,0 +1,75 @@
+#include <stdio.h>
+
+#include <stdlib.h>
+
+
+struct Node {
+  
+  int data;
+
+    struct Node *next;
+
+};
+
+
+void display(struct Node *head) {
+  
+  while (head != NULL) {
+
+        printf("%d -> ", head->data);
+
+        head = head->next;
+
+    }
+
+    printf("NULL\n");
+
+}
+
+
+int main() {
+
+    struct Node *head = NULL, *n1, *n2, *n3, *newNode, *temp;
+
+
+    n1 = (struct Node *)malloc(sizeof(struct Node));
+
+    n2 = (struct Node *)malloc(sizeof(struct Node));
+ 
+   n3 = (struct Node *)malloc(sizeof(struct Node));
+
+
+    n1->data = 10; n1->next = n2;
+
+    n2->data = 20; n2->next = n3;
+
+    n3->data = 30; n3->next = NULL;
+
+
+    head = n1;
+
+
+    newNode = (struct Node *)malloc(sizeof(struct Node));
+
+    newNode->data = 40;
+
+    newNode->next = NULL;
+
+
+    temp = head;
+
+    while (temp->next != NULL) {
+ 
+       temp = temp->next;
+
+    }
+
+    temp->next = newNode;
+
+
+    display(head);
+
+
+    return 0;
+
+}
